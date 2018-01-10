@@ -381,34 +381,10 @@ case "$PROJECT" in
 esac
 
 case "$DEVICE" in
-"hamachi"|"helix"|"sp6821a_gonk")
-	if $FULLFLASH; then
-		flash_fastboot nounlock $PROJECT
-		exit $?
-	else
-		run_adb root &&
-		run_adb shell stop b2g &&
-		run_adb remount &&
-		flash_gecko &&
-		flash_gaia &&
-		update_time &&
-		echo Restarting B2G &&
-		run_adb shell start b2g
-	fi
-	exit $?
-	;;
-
-"flame"|"otoro"|"unagi"|"keon"|"peak"|"inari"|"wasabi"|"flatfish"|"aries"|"leo"|"scorpion"|"sirius"|"honami"|"amami"|"tianchi"|"flamingo"|"eagle"|"scx15_sp7715"*)
-	flash_fastboot nounlock $PROJECT
-	;;
-
-"panda"|"maguro"|"crespo"|"crespo4g"|"mako"|"hammerhead"|"flo"|"shamu")
-	flash_fastboot unlock $PROJECT
-	;;
-
-"galaxys2")
-	flash_heimdall $PROJECT
-	;;
+"cubiebroad2")
+source build/envsetup.sh && lunch suger-cubiebroad2-eng && pack
+exit 0
+;;
 
 "fire-micropi")
 	source build/envsetup.sh && lunch fire_micropi-eng && pack
