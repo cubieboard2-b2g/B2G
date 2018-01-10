@@ -196,6 +196,8 @@ else
 	cp -r $SDK_PATH/hardware ./hardware
 	mkdir -p ./frameworks/native
 	cp -r $SDK_PATH/frameworks/native ./frameworks/native
+	mkdir -p ./device/softwinner
+	cp -r $SDK_PATH/device/softwinner-b2g ./device/softwinner
 	echo "OK!"
 	echo "check replace files!!"
 fi;
