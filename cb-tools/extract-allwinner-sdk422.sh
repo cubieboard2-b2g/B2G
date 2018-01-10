@@ -3,14 +3,8 @@ if [  ! -n "$1" ]; then
 else
     SDK_PATH=$1
     echo "copying Android files ..."
-    mkdir -p ./prebuilts/clang/darwin-x86/3.1
-	cp -r $SDK_PATH/prebuilts/clang/darwin-x86/3.1 ./prebuilts/clang/darwin-x86/3.1
-	mkdir -p ./prebuilts/clang/darwin-x86/3.2
-	cp -r $SDK_PATH/prebuilts/clang/darwin-x86/3.2 ./prebuilts/clang/darwin-x86/3.2
 	mkdir -p ./prebuilts/clang/linux-x86/3.1
 	cp -r $SDK_PATH/prebuilts/clang/linux-x86/3.1 ./prebuilts/clang/linux-x86/3.1
-	mkdir -p ./prebuilts/clang/linux-x86/3.2
-	cp -r $SDK_PATH/prebuilts/clang/linux-x86/3.2 ./prebuilts/clang/linux-x86/3.2
 	mkdir -p ./prebuilts/gcc/darwin-x86/arm/arm-eabi-4.6
 	cp -r $SDK_PATH/prebuilts/gcc/darwin-x86/arm/arm-eabi-4.6 ./prebuilts/gcc/darwin-x86/arm/arm-eabi-4.6
 	mkdir -p ./prebuilts/gcc/darwin-x86/arm/arm-linux-androideabi-4.6
@@ -23,8 +17,6 @@ else
 	cp -r $SDK_PATH/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6 ./prebuilts/gcc/linux-x86/arm/arm-eabi-4.6
 	mkdir -p ./prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6
 	cp -r $SDK_PATH/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6 ./prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6
-	mkdir -p ./prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8
-	cp -r $SDK_PATH/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8 ./prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8
 	mkdir -p ./device/sample
 	cp -r $SDK_PATH/device/sample ./device/sample
 	mkdir -p ./device/common
