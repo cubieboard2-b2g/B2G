@@ -76,90 +76,10 @@ echo GECKO_OBJDIR=$PWD/objdir-gecko >> .tmp-config
 echo DEVICE_NAME=$1 >> .tmp-config
 
 case "$1" in
-"galaxy-s2")
-	echo DEVICE=galaxys2 >> .tmp-config &&
+"cubiebroad2")
+	echo PRODUCT_NAME=fire_micropi >> .tmp-config &&
 	repo_sync $1
 	;;
-
-"galaxy-nexus")
-	echo DEVICE=maguro >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"nexus-4")
-	echo DEVICE=mako >> .tmp-config &&
-	repo_sync nexus-4
-	;;
-
-"nexus-4-kk")
-	echo DEVICE=mako >> .tmp-config &&
-	repo_sync nexus-4-kk
-	;;
-
-"nexus-5")
-	echo DEVICE=hammerhead >> .tmp-config &&
-	repo_sync nexus-5
-	;;
-
-"nexus-5-l")
-	echo DEVICE=hammerhead >> .tmp-config &&
-	repo_sync nexus-5-l
-	;;
-
-"nexus-6-l")
-	echo DEVICE=shamu >> .tmp-config &&
-	echo PRODUCT_NAME=aosp_shamu >> .tmp-config &&
-	repo_sync nexus-6-l
-	;;
-
-"nexus-s")
-	echo DEVICE=crespo >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"nexus-s-4g")
-	echo DEVICE=crespo4g >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"otoro"|"unagi"|"keon"|"inari"|"hamachi"|"peak"|"helix"|"wasabi"|"flatfish")
-	echo DEVICE=$1 >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"flame"|"flame-kk"|"flame-l")
-	echo PRODUCT_NAME=flame >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"tarako")
-	echo DEVICE=sp6821a_gonk >> .tmp-config &&
-	echo PRODUCT_NAME=sp6821a_gonk >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"dolphin")
-	echo DEVICE=scx15_sp7715ga >> .tmp-config &&
-	echo PRODUCT_NAME=scx15_sp7715gaplus >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"dolphin-512")
-	echo DEVICE=scx15_sp7715ea >> .tmp-config &&
-	echo PRODUCT_NAME=scx15_sp7715eaplus >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"pandaboard")
-	echo DEVICE=panda >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"vixen")
-	echo DEVICE=vixen >> .tmp-config &&
-	echo PRODUCT_NAME=vixen >> .tmp-config &&
-	repo_sync $1
-	;;  
 
 "emulator"|"emulator-jb"|"emulator-kk"|"emulator-l")
 	echo DEVICE=generic >> .tmp-config &&
@@ -178,63 +98,14 @@ case "$1" in
 	repo_sync $1
 	;;
 
-"flo")
-	echo DEVICE=flo >> .tmp-config &&
-	repo_sync $1
-	;;
 
-"rpi")
-	echo PRODUCT_NAME=rpi >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"leo-kk")
-	echo PRODUCT_NAME=leo >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"aries")
-	echo PRODUCT_NAME=aries >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"leo-l"|"aries-l"|"scorpion-l"|"sirius-l"|"honami-l"|"amami-l"|"tianchi-l"|"flamingo-l"|"eagle-l")
-	echo PRODUCT_NAME=$1 | sed 's/..$//' >> .tmp-config &&
-	repo_sync sony-aosp-l
-	;;
 
 *)
 	echo "Usage: $0 [-cdflnq] [-j <jobs>] [--force-sync] (device name)"
 	echo "Flags are passed through to |./repo sync|."
 	echo
 	echo Valid devices to configure are:
-	echo - galaxy-s2
-	echo - galaxy-nexus
-	echo - nexus-4
-	echo - nexus-4-kk
-	echo - nexus-5
-	echo - nexus-5-l
-	echo - nexus-6-l
-	echo - nexus-s
-	echo - nexus-s-4g
-	echo - flo "(Nexus 7 2013)"
-	echo - otoro
-	echo - unagi
-	echo - inari
-	echo - keon
-	echo - peak
-	echo - hamachi
-	echo - helix
-	echo - tarako
-	echo - dolphin
-	echo - dolphin-512
-	echo - pandaboard
-	echo - vixen
-	echo - flatfish
-	echo - flame
-	echo - flame-kk
-	echo - flame-l
-	echo - rpi "(Revision B)"
+	echo - cubiebroad2
 	echo - emulator
 	echo - emulator-jb
 	echo - emulator-kk
@@ -244,18 +115,6 @@ case "$1" in
 	echo - emulator-x86-kk
 	echo - emulator-x86-l
 	echo - fire-micropi
-	echo "> Sony Xperia devices"
-	echo - aries "(Z3 Compact KK)"
-	echo - aries-l "(Z3 Compact L)"
-	echo - leo-kk "(Z3 KK)"
-	echo - leo-l "(Z3 L)"
-	echo - scorpion-l "(Z3 Tablet Compact L)"
-	echo - sirius-l "(Z2 L)"
-	echo - honami-l "(Z1 L)"
-	echo - amami-l "(Z1 Compact L)"
-	echo - tianchi-l "(T2U L)"
-	echo - flamingo-l "(E3 L)"
-	echo - eagle-l "(M2 L)"
 	exit -1
 	;;
 esac
