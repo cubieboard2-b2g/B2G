@@ -194,5 +194,8 @@ else
 	cp -r $SDK_PATH/linaro_toolchain ./linaro_toolchain
 	mkdir -p ./hardware
 	cp -r $SDK_PATH/hardware ./hardware
+	mkdir -p ./frameworks/native
+	cp -r $SDK_PATH/frameworks/native ./frameworks/native
 	echo "OK!"
+	echo "check replace files!!"
 fi;
