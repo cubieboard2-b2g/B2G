@@ -45,6 +45,15 @@ update_time()
 	run_adb shell "toolbox date $(date +%s) ||
 	               toolbox date -s $(date +%Y%m%d.%H%M%S)" &&
 	run_adb shell setprop persist.sys.timezone $TIMEZONE
+
+	has_timekeep=$(run_adb shell ls /system/bin/timekeep | tr -d '\r\n')
+	if [ "${has_timekeep}" = "/system/bin/timekeep" ]; then
+	        cur_date=$(date +%s)
+	        since_epoch=$(run_adb shell cat /sys/class/rtc/rtc0/since_epoch | tr -d '\r\n')
+		timeadjust=$(echo "${cur_date}-${since_epoch}" | bc)
+		run_adb shell setprop persist.sys.timeadjust ${timeadjust}
+		run_adb shell timekeep restore
+	fi;
 }
 
 fastboot_flash_image()
@@ -141,7 +150,7 @@ flash_fastboot()
 	"")
 		VERB="erase"
 		if [ "$DEVICE" == "hammerhead" ] || [ "$DEVICE" == "mako" ] ||
-		[ "$DEVICE" == "flo" ]; then
+		[ "$DEVICE" == "flo" ] || [ "$DEVICE" == "fugu" ]; then
 			VERB="format"
 		fi
 		DATA_PART_NAME="userdata"
@@ -157,7 +166,7 @@ flash_fastboot()
 			fi
 		fi
 		case ${DEVICE} in
-		"aries"|"leo"|"scorpion"|"sirius"|"honami"|"amami"|"tianchi"|"flamingo"|"eagle")
+		"aries"|"leo"|"scorpion"|"sirius"|"castor"|"castor_windy"|"honami"|"amami"|"tianchi"|"flamingo"|"eagle"|"seagull")
 			fastboot_flash_image recovery FOTAKernel
 			;;
 		esac
@@ -381,11 +390,38 @@ case "$PROJECT" in
 esac
 
 case "$DEVICE" in
-"cubieboard2")
-source build/envsetup.sh && lunch suger-cubieboard2-eng && pack
-exit 0
-;;
+"sugar-cubieboard2")
+	pack
+	;;
 
+"hamachi"|"helix"|"sp6821a_gonk")
+	if $FULLFLASH; then
+		flash_fastboot nounlock $PROJECT
+		exit $?
+	else
+		run_adb root &&
+		run_adb shell stop b2g &&
+		run_adb remount &&
+		flash_gecko &&
+		flash_gaia &&
+		update_time &&
+		echo Restarting B2G &&
+		run_adb shell start b2g
+	fi
+	exit $?
+	;;
+
+"flame"|"otoro"|"unagi"|"keon"|"peak"|"inari"|"wasabi"|"flatfish"|"aries"|"leo"|"scorpion"|"sirius"|"castor"|"castor_windy"|"honami"|"amami"|"tianchi"|"flamingo"|"eagle"|"seagull"|"scx15_sp7715"*|"zte_p821a10")
+	flash_fastboot nounlock $PROJECT
+	;;
+
+"panda"|"maguro"|"crespo"|"crespo4g"|"mako"|"hammerhead"|"flo"|"shamu"|"FP2"|"fugu")
+	flash_fastboot unlock $PROJECT
+	;;
+
+"galaxys2")
+	flash_heimdall $PROJECT
+	;;
 
 *)
 	if [[ $(type -t flash_${DEVICE}) = function ]]; then
