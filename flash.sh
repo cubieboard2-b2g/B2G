@@ -381,15 +381,11 @@ case "$PROJECT" in
 esac
 
 case "$DEVICE" in
-"cubiebroad2")
-source build/envsetup.sh && lunch suger-cubiebroad2-eng && pack
+"cubieboard2")
+source build/envsetup.sh && lunch suger-cubieboard2-eng && pack
 exit 0
 ;;
 
-"fire-micropi")
-	source build/envsetup.sh && lunch fire_micropi-eng && pack
-	exit 0
-	;;
 
 *)
 	if [[ $(type -t flash_${DEVICE}) = function ]]; then

@@ -31,7 +31,7 @@ case `uname` in
 	exit -1
 esac
 
-GITREPO=${GITREPO:-"https://github.com/cubiebroad2-b2g/cubiebroad2-b2g-manifest.git"}
+GITREPO=${GITREPO:-"https://github.com/cubieboard2-b2g/b2g-manifest.git"}
 BRANCH=${BRANCH:-cb2-4.2}
 
 while [ $# -ge 1 ]; do
@@ -76,24 +76,7 @@ echo GECKO_OBJDIR=$PWD/objdir-gecko >> .tmp-config
 echo DEVICE_NAME=$1 >> .tmp-config
 
 case "$1" in
-"cubiebroad2")
-	echo PRODUCT_NAME=fire_micropi >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"emulator"|"emulator-jb"|"emulator-kk"|"emulator-l")
-	echo DEVICE=generic >> .tmp-config &&
-	echo LUNCH=full-eng >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"emulator-x86"|"emulator-x86-jb"|"emulator-x86-kk"|"emulator-x86-l")
-	echo DEVICE=generic_x86 >> .tmp-config &&
-	echo LUNCH=full_x86-eng >> .tmp-config &&
-	repo_sync $1
-	;;
-
-"fire-micropi")
+"cubieboard2")
 	echo PRODUCT_NAME=fire_micropi >> .tmp-config &&
 	repo_sync $1
 	;;
@@ -106,15 +89,6 @@ case "$1" in
 	echo
 	echo Valid devices to configure are:
 	echo - cubiebroad2
-	echo - emulator
-	echo - emulator-jb
-	echo - emulator-kk
-	echo - emulator-l
-	echo - emulator-x86
-	echo - emulator-x86-jb
-	echo - emulator-x86-kk
-	echo - emulator-x86-l
-	echo - fire-micropi
 	exit -1
 	;;
 esac
