@@ -31,8 +31,8 @@ case `uname` in
 	exit -1
 esac
 
-GITREPO=${GITREPO:-"https://github.com/micropi/a20-b2g-manifest.git"}
-BRANCH=${BRANCH:-micropi}
+GITREPO=${GITREPO:-"https://github.com/cubieboard2-b2g/b2g-manifest.git"}
+BRANCH=${BRANCH:-master}
 
 while [ $# -ge 1 ]; do
 	case $1 in
@@ -178,6 +178,11 @@ case "$1" in
 	repo_sync $1
 	;;
 
+"sugar-cubieboard2")
+	echo PRODUCT_NAME=sugar_cubieboard2 >> .tmp-config &&
+	repo_sync $1
+	;;
+
 "flo")
 	echo DEVICE=flo >> .tmp-config &&
 	repo_sync $1
@@ -208,7 +213,7 @@ case "$1" in
 	echo "Flags are passed through to |./repo sync|."
 	echo
 	echo Valid devices to configure are:
-	echo - galaxy-s2
+	echo - sugar-cubieboard2
 	echo - galaxy-nexus
 	echo - nexus-4
 	echo - nexus-4-kk

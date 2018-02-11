@@ -415,6 +415,11 @@ case "$DEVICE" in
 	exit 0
 	;;
 
+"sugar-cubieboard2")
+	source build/envsetup.sh && lunch sugar_cubieboard2-eng && pack
+	exit 0
+	;;
+
 *)
 	if [[ $(type -t flash_${DEVICE}) = function ]]; then
 		flash_${DEVICE} $PROJECT
